@@ -71,10 +71,14 @@ struct CreditCardView: View {
             
             Text(card.number ?? "")
             
-            Text("Credit limit: $\(card.limit)")
             
             HStack {
+                Text("Credit limit: $\(card.limit)")
                 Spacer()
+                VStack(alignment: .trailing) {
+                    Text("Valid thru")
+                    Text("\(String(format: "%02d", card.expMonth))/\(String(card.expYear % 2000))")
+                }
             }
             
         }
