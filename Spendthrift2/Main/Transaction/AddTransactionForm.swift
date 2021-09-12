@@ -10,10 +10,12 @@ import SwiftUI
 struct AddTransactionForm: View {
     
     @Environment(\.presentationMode) var presentationMode
+    
     @State private var name = ""
     @State private var amount = ""
     @State private var date = Date()
     @State private var photoData: Data?
+    
     @State private var shouldPresentPhotoPicker = false
 
     var body: some View {
@@ -61,6 +63,20 @@ struct AddTransactionForm: View {
     
     private var saveButton: some View {
         Button {
+            let context = PersistenceController.shared.container.viewContext
+            let transaction = CardTransaction(context: context)
+            transaction.name = name
+            transaction.date = date
+            transaction.amount = Float(amount) ?? 0
+            transaction.timestamp = Date()
+            transaction.photoData = photoData
+            
+            do {
+                try context.save()
+                presentationMode.wrappedValue.dismiss()
+            } catch {
+                print(error)
+            }
             
         } label: {
             Text("Save")
