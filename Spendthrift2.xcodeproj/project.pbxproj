@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		A33CEDD726EEA3ED00DEF84A /* TransactionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33CEDD626EEA3ED00DEF84A /* TransactionsView.swift */; };
+		A33CEDD926EEA58700DEF84A /* TransactionCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A33CEDD826EEA58700DEF84A /* TransactionCardView.swift */; };
 		A372175D26E6760900AB3AEA /* Spendthrift2App.swift in Sources */ = {isa = PBXBuildFile; fileRef = A372175C26E6760900AB3AEA /* Spendthrift2App.swift */; };
 		A372175F26E6760900AB3AEA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A372175E26E6760900AB3AEA /* ContentView.swift */; };
 		A372176126E6760B00AB3AEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A372176026E6760B00AB3AEA /* Assets.xcassets */; };
@@ -22,6 +24,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		A33CEDD626EEA3ED00DEF84A /* TransactionsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionsView.swift; sourceTree = "<group>"; };
+		A33CEDD826EEA58700DEF84A /* TransactionCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransactionCardView.swift; sourceTree = "<group>"; };
 		A372175926E6760900AB3AEA /* Spendthrift2.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Spendthrift2.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		A372175C26E6760900AB3AEA /* Spendthrift2App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Spendthrift2App.swift; sourceTree = "<group>"; };
 		A372175E26E6760900AB3AEA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -121,6 +125,8 @@
 			isa = PBXGroup;
 			children = (
 				A37B803C26EB57340057D094 /* AddTransactionForm.swift */,
+				A33CEDD626EEA3ED00DEF84A /* TransactionsView.swift */,
+				A33CEDD826EEA58700DEF84A /* TransactionCardView.swift */,
 			);
 			path = Transaction;
 			sourceTree = "<group>";
@@ -199,11 +205,13 @@
 				A372177326E685E600AB3AEA /* AddCardForm.swift in Sources */,
 				A37B803F26EB70B90057D094 /* PhotoPickerView.swift in Sources */,
 				A37B803926EB539D0057D094 /* UIColor+Extensions.swift in Sources */,
+				A33CEDD726EEA3ED00DEF84A /* TransactionsView.swift in Sources */,
 				A37B803D26EB57340057D094 /* AddTransactionForm.swift in Sources */,
 				A372176926E6760B00AB3AEA /* Spendthrift2.xcdatamodeld in Sources */,
 				A37B803726EB48080057D094 /* CreditCardView.swift in Sources */,
 				A372177126E676FF00AB3AEA /* MainView.swift in Sources */,
 				A372175D26E6760900AB3AEA /* Spendthrift2App.swift in Sources */,
+				A33CEDD926EEA58700DEF84A /* TransactionCardView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
