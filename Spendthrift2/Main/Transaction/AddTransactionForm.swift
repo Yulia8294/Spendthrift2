@@ -6,9 +6,12 @@
 //
 
 import SwiftUI
+import CoreData
 
 struct AddTransactionForm: View {
     
+    let card: Card
+
     @Environment(\.presentationMode) var presentationMode
     
     @State private var name = ""
@@ -70,6 +73,7 @@ struct AddTransactionForm: View {
             transaction.amount = Float(amount) ?? 0
             transaction.timestamp = Date()
             transaction.photoData = photoData
+            transaction.card = card
             
             do {
                 try context.save()
@@ -85,7 +89,14 @@ struct AddTransactionForm: View {
 }
 
 struct AddTransactionForm_Previews: PreviewProvider {
+    static let firstCard: Card? = {
+        let context = PersistenceController.shared.container.viewContext
+        let request: NSFetchRequest<Card> = Card.fetchRequest()
+        request.sortDescriptors = [.init(key: "timestamp", ascending: false)]
+        return try? context.fetch(request).first
+    }()
+    
     static var previews: some View {
-        AddTransactionForm()
+        AddTransactionForm(card: firstCard ?? Card())
     }
 }

@@ -10,6 +10,7 @@ import SwiftUI
 struct MainView: View {
     
     @State private var shouldPresentAddCardForm = false
+    @State private var selectedCardHash = -1
     
     @Environment(\.managedObjectContext) private var viewContext
 
@@ -25,17 +26,21 @@ struct MainView: View {
             ScrollView {
                 
                 if !cards.isEmpty {
-                    TabView {
+                    TabView(selection: $selectedCardHash) {
                         ForEach(cards) { card in
                             CreditCardView(card: card)
                                 .padding(.bottom, 50)
+                                .tag(card.hash)
                         }
                     }
                     .tabViewStyle(PageTabViewStyle(indexDisplayMode: .always))
                     .frame(height: 280)
                     .indexViewStyle(PageIndexViewStyle(backgroundDisplayMode: .always))
                     
-                    TransactionsView()
+                    if let firstIndex = cards.firstIndex(where: { $0.hash == selectedCardHash }) {
+                        let card = cards[firstIndex]
+                        TransactionsView(card: card)
+                    }
                     
                 } else {
                     emptyPromptMessage
@@ -43,15 +48,17 @@ struct MainView: View {
                 
                 Spacer()
                     .fullScreenCover(isPresented: $shouldPresentAddCardForm, onDismiss: nil) {
-                        AddCardForm()
+                        AddCardForm(card: nil) { card in
+                            self.selectedCardHash = card.hash
+                        }
                     }
             }
             .navigationTitle("Credit card")
-            .navigationBarItems(leading: HStack {
-                addItemButton
-                deleteAllButton
-            },
-            trailing: addCardButton)
+            .navigationBarItems(leading: deleteAllButton,
+                                trailing: addCardButton)
+            .onAppear {
+                self.selectedCardHash = cards.first?.hash ?? -1
+            }
         }
     }
 
@@ -101,23 +108,6 @@ struct MainView: View {
                 .padding(EdgeInsets(top: 8, leading: 10, bottom: 8, trailing: 10))
                 .background(Color.black)
                 .cornerRadius(5)
-        })
-    }
-    
-    var addItemButton: some View {
-        Button(action: {
-            withAnimation {
-                let card = Card(context: viewContext)
-                card.timestamp = Date()
-                
-                do {
-                    try viewContext.save()
-                } catch {
-                }
-                
-            }
-        }, label: {
-            Text("Add Item")
         })
     }
 }
