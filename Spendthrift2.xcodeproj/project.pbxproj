@@ -21,6 +21,7 @@
 		A37B803926EB539D0057D094 /* UIColor+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37B803826EB539D0057D094 /* UIColor+Extensions.swift */; };
 		A37B803D26EB57340057D094 /* AddTransactionForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37B803C26EB57340057D094 /* AddTransactionForm.swift */; };
 		A37B803F26EB70B90057D094 /* PhotoPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A37B803E26EB70B90057D094 /* PhotoPickerView.swift */; };
+		A3E016B22704656200F2B9C9 /* CategoriesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = A3E016B12704656200F2B9C9 /* CategoriesListView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		A37B803826EB539D0057D094 /* UIColor+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extensions.swift"; sourceTree = "<group>"; };
 		A37B803C26EB57340057D094 /* AddTransactionForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddTransactionForm.swift; sourceTree = "<group>"; };
 		A37B803E26EB70B90057D094 /* PhotoPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoPickerView.swift; sourceTree = "<group>"; };
+		A3E016B12704656200F2B9C9 /* CategoriesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoriesListView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,6 +129,7 @@
 				A37B803C26EB57340057D094 /* AddTransactionForm.swift */,
 				A33CEDD626EEA3ED00DEF84A /* TransactionsView.swift */,
 				A33CEDD826EEA58700DEF84A /* TransactionCardView.swift */,
+				A3E016B12704656200F2B9C9 /* CategoriesListView.swift */,
 			);
 			path = Transaction;
 			sourceTree = "<group>";
@@ -204,6 +207,7 @@
 				A372177326E685E600AB3AEA /* AddCardForm.swift in Sources */,
 				A37B803F26EB70B90057D094 /* PhotoPickerView.swift in Sources */,
 				A37B803926EB539D0057D094 /* UIColor+Extensions.swift in Sources */,
+				A3E016B22704656200F2B9C9 /* CategoriesListView.swift in Sources */,
 				A33CEDD726EEA3ED00DEF84A /* TransactionsView.swift in Sources */,
 				A37B803D26EB57340057D094 /* AddTransactionForm.swift in Sources */,
 				A372176926E6760B00AB3AEA /* Spendthrift2.xcdatamodeld in Sources */,
