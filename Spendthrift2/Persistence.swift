@@ -6,6 +6,7 @@
 //
 
 import CoreData
+import UIKit
 
 struct PersistenceController {
     static let shared = PersistenceController()
@@ -51,5 +52,29 @@ struct PersistenceController {
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
         })
+        populateInitialData()
     }
+    
+    private func populateInitialData() {
+        if UserDefaults.standard.bool(forKey: Self.populatedDataKey) {
+            return
+        }
+        
+        let context = container.viewContext
+        
+        let electronics = TransactionCategory(context: context)
+        electronics.name = "Electronics"
+        electronics.colorData = UIColor.orange.encode()
+        
+
+        
+        do {
+            try context.save()
+            UserDefaults.standard.set(true, forKey: Self.populatedDataKey)
+        } catch {
+            print(error)
+        }
+    }
+    
+    static let populatedDataKey = "populatedData"
 }

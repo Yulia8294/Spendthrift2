@@ -12,6 +12,24 @@ struct AddTransactionForm: View {
     
     let card: Card
 
+    
+    init(card: Card) {
+        self.card = card
+        
+        let context = PersistenceController.shared.container.viewContext
+        let request = TransactionCategory.fetchRequest()
+        request.sortDescriptors = [.init(key: "timestamp", ascending: false)]
+        
+        do {
+            let result = try context.fetch(request)
+            if let first = result.first {
+                self._selectedCategories = .init(initialValue: [first])
+            }
+        } catch {
+            print(error)
+        }
+    }
+    
     @Environment(\.presentationMode) var presentationMode
     
     @State private var name = ""
@@ -124,5 +142,6 @@ struct AddTransactionForm_Previews: PreviewProvider {
     
     static var previews: some View {
         AddTransactionForm(card: firstCard ?? Card())
+            .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
     }
 }
