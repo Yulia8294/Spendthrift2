@@ -9,6 +9,8 @@ import SwiftUI
 
 struct CategoriesListView: View {
     
+    @Binding var selectedCategories: Set<TransactionCategory>
+
     @State private var name = ""
     @State private var color = Color.red
     
@@ -19,22 +21,39 @@ struct CategoriesListView: View {
         animation: .default)
     private var categories: FetchedResults<TransactionCategory>
     
+    
     var body: some View {
         Form {
             Section(header: Text("Select a category")) {
                 ForEach(categories) { category in
-                    HStack(spacing: 10) {
-                        if let data = category.colorData, let uiColor = UIColor.color(data: data) {
-                            let color = Color(uiColor)
-                            Spacer()
-                                .frame(width: 30, height: 10)
-                                .background(color)
-                                .cornerRadius(3)
-                        }
-                        
-                        Text(category.name ?? "")
+                    Button {
+                        handleCategorySelection(category)
+                    } label: {
+                        HStack(spacing: 10) {
+                            if let data = category.colorData, let uiColor = UIColor.color(data: data) {
+                                let color = Color(uiColor)
+                                Spacer()
+                                    .frame(width: 30, height: 10)
+                                    .background(color)
+                                    .cornerRadius(3)
+                            }
+                            
+                            Text(category.name ?? "")
+                                .foregroundColor(Color(.label))
 
+                            Spacer()
+                            
+                            if selectedCategories.contains(category) {
+                                Image(systemName: "checkmark")
+                            }
+                        }
                     }
+                }
+                .onDelete { indexSet in
+                    indexSet.forEach { i in
+                        viewContext.delete(categories[i])
+                    }
+                    try? viewContext.save()
                 }
             }
             
@@ -58,6 +77,14 @@ struct CategoriesListView: View {
         }
     }
     
+    private func handleCategorySelection(_ category: TransactionCategory) {
+        if selectedCategories.contains(category) {
+            selectedCategories.remove(category)
+        } else {
+            selectedCategories.insert(category)
+        }
+    }
+    
     private func handleCreate() {
         let context = PersistenceController.shared.container.viewContext
         
@@ -74,7 +101,7 @@ struct CategoriesListView: View {
 
 struct CategoriesListView_Previews: PreviewProvider {
     static var previews: some View {
-        CategoriesListView()
+        CategoriesListView(selectedCategories: .constant(.init()))
             .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
     }
 }
