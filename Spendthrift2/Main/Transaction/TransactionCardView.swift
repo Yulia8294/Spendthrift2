@@ -47,6 +47,31 @@ struct TransactionCardView: View {
                     
                 }
                 
+                if let cats = transaction.categories as? Set<TransactionCategory> {
+                    
+                    let sortedCats = Array(cats)
+                        .sorted { $0.timestamp?.compare($1.timestamp ?? Date()) == .orderedDescending }
+    
+                    HStack {
+                        ForEach(sortedCats, id: \.self) { cat in
+                            HStack(spacing: 12) {
+                                if let data = cat.colorData, let uiColor = UIColor.color(data: data) {
+                                    let color = Color(uiColor)
+                                    Text(cat.name ?? "")
+                                        .font(.system(size: 16, weight: .semibold))
+                                        .padding(.vertical, 5)
+                                        .padding(.horizontal, 8)
+                                        .background(color)
+                                        .foregroundColor(.white)
+                                        .cornerRadius(5)
+                                }
+                            }
+                        }
+                        Spacer()
+                    }
+                }
+                
+                
                 if let photoData = transaction.photoData,
                    let uiImage = UIImage(data: photoData) {
                     Image(uiImage: uiImage)
@@ -86,5 +111,6 @@ struct TransactionCardView: View {
 struct TransactionCardView_Previews: PreviewProvider {
     static var previews: some View {
         TransactionCardView(transaction: CardTransaction())
+            .environment(\.managedObjectContext, PersistenceController.shared.container.viewContext)
     }
 }
